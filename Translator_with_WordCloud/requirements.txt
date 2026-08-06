@@ -1,0 +1,10 @@
+streamlit
+deep-translator
+gtts
+langdetect
+pycountry
+wordcloud
+matplotlib
+nltk
+mtranslate
+pandas
