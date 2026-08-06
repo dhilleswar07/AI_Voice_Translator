@@ -10,8 +10,15 @@ from nltk.tokenize import word_tokenize
 import nltk
 
 # Download NLTK data
-nltk.download("punkt")
-nltk.download("words")
+import nltk
+
+resources = ["punkt", "punkt_tab", "words"]
+
+for resource in resources:
+    try:
+        nltk.data.find(f"tokenizers/{resource}" if "punkt" in resource else f"corpora/{resource}")
+    except LookupError:
+        nltk.download(resource)
 
 # -------------------------------
 # Read Aloud Function
