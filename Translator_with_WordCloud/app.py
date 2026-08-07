@@ -23,11 +23,21 @@ for resource in resources:
 # -------------------------------
 # Read Aloud Function
 # -------------------------------
+from gtts import gTTS
+import tempfile
+
 def read_aloud(text, language="en"):
     try:
         tts = gTTS(text=text, lang=language)
-        tts.save("temp.mp3")
-        os.system("start temp.mp3")
+
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as fp:
+            tts.save(fp.name)
+
+            audio_file = open(fp.name, "rb")
+            audio_bytes = audio_file.read()
+
+        st.audio(audio_bytes, format="audio/mp3")
+
     except Exception as e:
         st.error(f"Speech Error: {e}")
 
